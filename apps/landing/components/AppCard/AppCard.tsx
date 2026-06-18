@@ -1,33 +1,40 @@
 import styles from "./AppCard.module.css";
 
 export type AppCardProps = {
-  cardTitle: string;
-  price: number;
-  isFree: boolean;
+  id: string;
+  title: string;
+  slug: string;
   description: string;
-  category: string;
-  platforms: string;
-  img: string;
+  categoryId: string;
+  category: {
+    title: string;
+  };
+  platforms: ("web" | "ios" | "android")[]; 
+  price: 0;
+  isFree: true;
+  releaseDate: "2025-03-15T00:00:00.000Z";
+  cover: {
+    url: string;
+  };
 };
 
 export function AppCard({
-  cardTitle,
+  title,
   price,
   isFree,
   description,
-  category,
   platforms,
-  img,
+  cover,
 }: AppCardProps) {
   return (
     <article className={styles.card}>
       <div className={styles.imageWrap}>
-        <img className={styles.image} src={img} alt={cardTitle} />
+        <img className={styles.image} src={`https://ministor.ru/${cover?.url}`} alt={title} />
       </div>
 
       <div className={styles.cardContent}>
         <div className={styles.cardHeader}>
-          <h2 className={styles.cardTitle}>{cardTitle}</h2>
+          <h2 className={styles.cardTitle}>{title}</h2>
           <span className={styles.price}>
             {isFree ? "Бесплатно" : `${price} ₽`}
           </span>
@@ -36,7 +43,7 @@ export function AppCard({
         <p className={styles.description}>{description}</p>
 
         <div className={styles.cardFooter}>
-          <span>{category}</span>
+
           <span>{platforms}</span>
         </div>
       </div>
