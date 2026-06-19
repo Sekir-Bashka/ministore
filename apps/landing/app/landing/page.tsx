@@ -1,3 +1,6 @@
+//серверный компонент
+//отвечает за получение данных с бэкенда и рендеринг HTML-структуры каталога
+
 import { Filter } from "@/app/landing/Filter";
 import { AppCard } from "../../components/AppCard/AppCard";
 
@@ -19,17 +22,19 @@ export type CatalogApp = {
   };
 };
 
+//асинхронные функции
 async function getData(isFree: string): Promise<CatalogApp[]> {
 
   const response = await fetch(
-    `https://ministor.ru/api/landing/apps?isFree=${isFree}`,
+    `https://ministor.ru/api/landing/apps?isFree=${isFree}`, //запрос fetch к внешнему API
   );
   const data = await response.json();
   return data.items;
 }
 
 export default async function Landing(props: any) {
-  const { isFree } = await props.SearchParams;
+  const { isFree } = await props.SearchParams; //входной аргумент функции
+                                              //извлекает текущее значение фильтра из URL
   const apps = await getData(isFree);
   return (
     <div>
@@ -37,10 +42,11 @@ export default async function Landing(props: any) {
       <div>
         <Filter />
       </div>
-      {apps.length > 0 ?
+      {apps.length > 0 ? //если массив не пустой, код перебирает его
+                        // и для каждого элемента отрисовывает компонент карточки
         apps.map((app: CatalogApp) => (<AppCard {...app} key={app.id} />)
       ) : (
-        <div>Приложений не найдено</div>
+        <div>Приложений не найдено</div> //Если приложений по заданному фильтру нет, выводится заглушка
       )}
     </div>
   );

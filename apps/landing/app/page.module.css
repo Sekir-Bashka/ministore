@@ -1,4 +1,6 @@
+/* изолированы и не влияют на другие компоненты */
 .nav {
+  /* Стилизует меню навигации */
   border: 1px solid blue;
   padding: 10px;
   margin: 40px;
@@ -10,7 +12,7 @@
 }
 
 .footer {
-  flex: 1 1 auto;
+  flex: 1 1 auto; /* занимает все оставшееся место на странице по вертикали */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

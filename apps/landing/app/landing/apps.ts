@@ -1,3 +1,5 @@
+//описание структуры данных приложения + заглушки с примерами карточек
+
 type AppCardProps = {
   cardTitle: string;
   price: number;
